@@ -11,3 +11,6 @@ Both containers will start
 parsing every monday hh.ru with data-related vacancies created last week,
 then their number will be sent to slack channel, 
 dump with employers that have number of vacancies greater than most will be placed in samples folder.
+
+**Important:**
+web hook is removed from code, so in order to be able to post message in slack channel you need to paste missing address
