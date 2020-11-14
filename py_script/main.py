@@ -5,21 +5,17 @@ from datetime import date, timedelta
 
 import requests
 from celery import Celery
+from celery.schedules import crontab
 
 app = Celery("tasks", broker="amqp://rabbitmq")  # backend="db+sqlite:///db.sqlite3"
 
 app.conf.beat_schedule = {
     'every-30-secs': {
         'task': 'main.parse_hh',
-        'schedule': timedelta(seconds=30),
+        'schedule': crontab(minute=0, hour=10, day_of_week='mon'),
     }
 }
-
-
-@app.task
-def add(x, y):
-    # print(x + y)
-    return x + y
+app.conf.timezone = 'Europe/Moscow'
 
 
 @app.task
@@ -48,7 +44,7 @@ def parse_hh():
         file.write(i[0] + ", " + str(i[1]) + "\n")
     file.close()
 
-    response = requests.post('https://hooks.slack.com/services/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',
+    response = requests.post('https://hooks.slack.com/services/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',
                              headers={'Content-type': 'application/json'},
                              data=json.dumps(
                                  ({"text": "За эту неделю появилось " + str(res['found']) + " новых вакансий(minkovichei@gmail.com)"})))
