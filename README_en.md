@@ -1,4 +1,4 @@
-[По-русски](README.md)/In english
+[По-русски](README.md) | **In english**
 
 Hh.ru service parser set up to look for data-related vacancies
 
