@@ -44,7 +44,7 @@ def parse_hh():
         file.write(i[0] + ", " + str(i[1]) + "\n")
     file.close()
 
-    response = requests.post('https://hooks.slack.com/services/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',
+    response = requests.post('https://hooks.slack.com/services/***',
                              headers={'Content-type': 'application/json'},
                              data=json.dumps(
                                  ({"text": "За эту неделю появилось " + str(res['found']) + " новых вакансий(minkovichei@gmail.com)"})))
