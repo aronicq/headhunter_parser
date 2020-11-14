@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+    - 5672:5672
+    - 15672:15672
+
+  python_worker:
+    build: .
+    command: "celery --app main worker --beat --loglevel info "
+    volumes:
+    - ./py_script:/py_script
+    depends_on:
+      - rabbitmq
